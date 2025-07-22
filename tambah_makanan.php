@@ -45,7 +45,7 @@
         </div>
         <div class="mb-3">
           <label for="Foto" class="form-labe">Foto</label>
-          <input type="file" name="Foto" id="Foto" class="form-control" style="border: 1px solid rgb(49, 49, 49);">
+          <input type="file" name="foto" id="foto" class="form-control" style="border: 1px solid rgb(49, 49, 49);">
         </div>
         <div class="mb-3">
           <label for="qty" class="form-labe">Quantity</label>

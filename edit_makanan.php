@@ -1,3 +1,11 @@
+<?php 
+include 'controler_makanan.php';
+
+$barcode = $_GET["barcode"];
+$query = mysqli_query($conn, "SELECT * FROM alien_mart WHERE barcode = '$barcode'");
+$makanan = mysqli_fetch_assoc($query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,22 +42,22 @@
   <div class="container" >
     <div class="container-fluid mt-5 pt-3">
       <h1 class="text-center mb-4">Edit data makanan</h1>
-      <form action="controler.php" method="post" enctype="multipart/form-data" class="fs-5 fw-medium">
+      <form action="controler_makanan.php" method="post" enctype="multipart/form-data" class="fs-5 fw-medium">
         <div class="mb-3">
           <label for="barcode" class="form-labe">Barcode</label>
-          <input type="text" name="barcode" id="barcode" class="form-control" style="border: 1px solid rgb(49, 49, 49);" readonly value="barcode">
+          <input type="text" name="barcode" id="barcode" class="form-control" style="border: 1px solid rgb(49, 49, 49);" readonly value="<?php echo $makanan['barcode']; ?>" >
         </div>
         <div class="mb-3">
           <label for="nama" class="form-labe">Nama</label>
-          <input type="text" name="nama" id="nama" class="form-control" style="border: 1px solid rgb(49, 49, 49);" value="nama">
+          <input type="text" name="nama" id="nama" class="form-control" style="border: 1px solid rgb(49, 49, 49);" value="<?php echo $makanan['nama'] ?>">
         </div>
         <div class="mb-3">
           <label for="Foto" class="form-labe">Foto</label>
-          <input type="file" name="Foto" id="Foto" class="form-control" style="border: 1px solid rgb(49, 49, 49);">
+          <input type="file" name="gambar" id="Foto" class="form-control" style="border: 1px solid rgb(49, 49, 49);">
         </div>
         <div class="mb-3">
           <label for="qty" class="form-labe">Quantity</label>
-          <input type="number" name="qty" id="qty" class="form-control" style="border: 1px solid rgb(49, 49, 49);" min="0" value="qty">
+          <input type="number" name="qty" id="qty" class="form-control" style="border: 1px solid rgb(49, 49, 49);" min="0" value="<?php echo $makanan['qty'] ?>">
         </div>
         <button type="submit" name="edit_makanan" class="btn btn-warning fw-medium" style="color: #fff;">Edit makanan</button>
       </form>
