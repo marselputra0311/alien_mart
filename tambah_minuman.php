@@ -34,7 +34,7 @@
   <div class="container" >
     <div class="container-fluid mt-5 pt-3">
       <h1 class="text-center mb-4">Tambah data minuman</h1>
-      <form action="controler.php" method="post" enctype="multipart/form-data" class="fs-5 fw-medium">
+      <form action="controler_minuman.php" method="post" enctype="multipart/form-data" class="fs-5 fw-medium">
         <div class="mb-3">
           <label for="barcode" class="form-labe">Barcode</label>
           <input type="text" name="barcode" id="barcode" class="form-control" style="border: 1px solid rgb(49, 49, 49);" placeholder="8899.....">
@@ -44,8 +44,8 @@
           <input type="text" name="nama" id="nama" class="form-control" style="border: 1px solid rgb(49, 49, 49);" placeholder="Aqua 1L">
         </div>
         <div class="mb-3">
-          <label for="Foto" class="form-labe">Foto</label>
-          <input type="file" name="Foto" id="Foto" class="form-control" style="border: 1px solid rgb(49, 49, 49);">
+          <label for="gambar" class="form-labe">gambar</label>
+          <input type="file" name="gambar" id="gambar" class="form-control" style="border: 1px solid rgb(49, 49, 49);">
         </div>
         <div class="mb-3">
           <label for="qty" class="form-labe">Quantity</label>

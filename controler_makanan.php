@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "php");
+$conn = mysqli_connect("localhost", "root", "", "alien_mart");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tambah_makanan"])) {
   $barcode = $_POST["barcode"];
@@ -18,10 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tambah_makanan"])) {
 
     if (in_array($fotoext, $allowedext)) {
       $newname = uniqid("IMG-", true) . "." . $fotoext;
-      $uplodpath = "uplod/" . $newname;
+      $uplodpath = "uplod/makanan/" . $newname;
 
       if (move_uploaded_file($fototmp, $uplodpath)) {
-        $sql = "INSERT INTO alien_mart (barcode, nama, gambar, qty) VALUE ('$barcode', '$nama', '$newname', '$qty')";
+        $sql = "INSERT INTO makanan (barcode, nama, gambar, qty) VALUE ('$barcode', '$nama', '$newname', '$qty')";
         if (mysqli_query($conn, $sql)) {
           header("Location: index.php");
           exit;
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tambah_makanan"])) {
 
 // tampil data
 $data = [];
-$result = mysqli_query($conn, "SELECT * FROM alien_mart");
+$result = mysqli_query($conn, "SELECT * FROM makanan");
 while ($row = mysqli_fetch_assoc($result)) {
   $data[] = $row;
 }
@@ -52,13 +52,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" &&  isset($_POST["hapus_makanan"])) {
   $barcode = $_POST["barcode"];
   $gambar = $_POST["gambar"];
 
-  $filepath = "uplod/" . $gambar;
+  $filepath = "uplod/makanan/" . $gambar;
 
   if (file_exists($filepath)) {
     unlink($filepath);
   }
 
-  $sql = "DELETE FROM alien_mart where barcode = '$barcode'";
+  $sql = "DELETE FROM makanan where barcode = '$barcode'";
   if (mysqli_query($conn, $sql)) {
     header("Location: index.php");
     exit;
@@ -75,10 +75,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit_makanan"])) {
 
   $gambarNama = $_FILES['gambar']['name'];
   $gambartmp = $_FILES['gambar']['tmp_name'];
-  $uplod = "uplod/";
+  $uplod = "uplod/makanan/";
 
   if (!empty($gambarNama)) {
-    $getOld = mysqli_query($conn, "SELECT gambar FROM alien_mart WHERE barcode  = '$barcode'");
+    $getOld = mysqli_query($conn, "SELECT gambar FROM makanan WHERE barcode  = '$barcode'");
     $old = mysqli_fetch_assoc($getOld);
     $oldFile = $uplod . $old['gambar'];
     
@@ -87,11 +87,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit_makanan"])) {
     }
 
     move_uploaded_file($gambartmp, $uplod . $gambarNama);
-    $sql = "UPDATE alien_mart
+    $sql = "UPDATE makanan
           set nama = '$nama', gambar = '$gambarNama', qty = '$qty'
           WHERE barcode = '$barcode'";
   }else{
-    $sql = "UPDATE alien_mart
+    $sql = "UPDATE makanan
           set nama = '$nama', qty = '$qty'
           WHERE barcode = '$barcode'";
   }

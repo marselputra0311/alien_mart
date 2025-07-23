@@ -57,7 +57,7 @@ include 'controler_makanan.php';
               <td><?php echo $no++; ?></td>
               <td><?php echo $makanan["barcode"] ?></td>
               <td><?php echo $makanan["nama"] ?></td>
-              <td><img src="uplod/<?php echo $makanan["gambar"] ?>" alt="gambar kosong" width="100px"></td>
+              <td><img src="uplod/makanan/<?php echo $makanan["gambar"] ?>" alt="gambar kosong" width="100px"></td>
               <td><?php echo $makanan["qty"] ?></td>
               <td>
                 <a href="edit_makanan.php?barcode=<?php echo $makanan['barcode']; ?>" class="btn bg-warning fw-medium" style="border: 2px solid rgb(255, 255, 255);">Edit</a>

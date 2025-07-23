@@ -2,7 +2,7 @@
 include 'controler_makanan.php';
 
 $barcode = $_GET["barcode"];
-$query = mysqli_query($conn, "SELECT * FROM alien_mart WHERE barcode = '$barcode'");
+$query = mysqli_query($conn, "SELECT * FROM makanan WHERE barcode = '$barcode'");
 $makanan = mysqli_fetch_assoc($query);
 ?>
 
