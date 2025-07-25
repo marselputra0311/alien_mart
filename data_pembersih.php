@@ -1,3 +1,8 @@
+<?php
+include "controler_pembersih.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +15,7 @@
 
 <body>
   <nav class="navbar navbar-expand-lg bg-primary-subtle" style="border-bottom: 2px solid rgb(119, 124, 161);">
-    <div class="container-fluid mx-5 my-3" >
+    <div class="container-fluid mx-5 my-3">
       <a class="navbar-brand fs-3 fw-medium" href="#" style="color: rgb(0, 64, 255);">Alien Mart</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -31,7 +36,7 @@
     </div>
   </nav>
 
-  <div class="container" >
+  <div class="container">
     <div class="container-fluid mt-3">
       <table class="table text-center table-hover table-striped table-dark">
         <thead>
@@ -45,23 +50,28 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr>
-            <td>1</td>
-            <td>88995678421</td>
-            <td>So Klin Lantai</td>
-            <td>Tes</td>
-            <td>10</td>
-            <td>
-              <a href="edit_pembersih.php" class="btn bg-warning fw-medium" style="border: 2px solid rgb(255, 255, 255);">Edit</a>
-            </td>
-            <td>
-              <form action="contoler.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" value="bacode">
-                <input type="hidden" value="gambar">
-                <button type="submit" name="hapus_pembersih" class="btn bg-danger fw-medium" style="border: 2px solid rgb(255, 255, 255);">Hapus</button>
-              </form>
-            </td>
-          </tr>
+          <?php
+          $no = 1;
+          foreach ($data as $pembersih):
+          ?>
+            <tr class="text-center align-middle">
+              <td><?php echo $no++; ?></td>
+              <td><?php echo $pembersih["barcode"] ?></td>
+              <td><?php echo $pembersih["nama"] ?></td>
+              <td><img src="uplod/pembersih/<?php echo $pembersih["gambar"] ?>" alt="gambar rusak" width="200px"></td>
+              <td><?php echo $pembersih["qty"] ?></td>
+              <td>
+                <a href="edit_pembersih.php?barcode=<?php echo $pembersih['barcode'] ?>" class="btn bg-warning fw-medium" style="border: 2px solid rgb(255, 255, 255);">Edit</a>
+              </td>
+              <td>
+                <form action="controler_pembersih.php" method="post" enctype="multipart/form-data">
+                  <input type="hidden" value="<?php echo $pembersih["barcode"] ?>" name="barcode">
+                  <input type="hidden" value="<?php echo $pembersih["gambar"] ?>" name="gambar">
+                  <button type="submit" name="hapus_pembersih" class="btn bg-danger fw-medium" style="border: 2px solid rgb(255, 255, 255);">Hapus</button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
       <a href="tambah_pembersih.php" class="btn btn-primary fw-medium ">Tambah data</a>
